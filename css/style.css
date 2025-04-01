@@ -29,6 +29,10 @@
     --input-text: #E9E9E9;
 }
 
+body, html {
+    overflow-x: hidden;
+}
+
 body {
     color: var(--text-color);
     font-family: 'Poppins', sans-serif;
