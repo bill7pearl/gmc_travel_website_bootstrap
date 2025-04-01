@@ -133,22 +133,22 @@ input, select, textarea, .form-control, .form-select {
 
 /* Theme Toggle */
 .theme-toggle {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.25rem;
+    cursor: pointer;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: var(--bg-light);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary-color);
-    border: none;
-    cursor: pointer;
-    margin-left: 1rem;
     transition: all 0.3s ease;
 }
 
 .theme-toggle:hover {
-    transform: rotate(30deg);
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .theme-toggle i {
@@ -597,10 +597,10 @@ footer p {
 
 /* Dark Mode / Light Mode Animation */
 .switch-animation {
-    animation: rotate 0.5s ease;
+    animation: rotateIcon 0.5s ease;
 }
 
-@keyframes rotate {
+@keyframes rotateIcon {
     0% {
         transform: rotate(0deg);
     }
@@ -635,19 +635,56 @@ footer p {
 }
 
 /* Responsive Adjustments */
+@media (min-width: 992px) {
+    /* On desktop, give the toggle button a bit more space */
+    .theme-toggle {
+        margin-right: 0;
+        margin-left: 15px;
+    }
+}
+
 @media (max-width: 991px) {
-    .hero h1 {
-        font-size: 3.5rem;
+    .hero {
+        text-align: center;
+        padding-top: 7rem;
     }
     
-    .trip-card {
+    .hero .row {
+        flex-direction: column-reverse;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+        margin-top: 2rem;
+    }
+    
+    .destination-card, .service-card, .testimonial-card, .subscribe-card {
+        margin-bottom: 2rem;
+    }
+    
+    .subscribe-card {
+        padding: 2rem 1rem !important;
+    }
+    
+    .copyright {
         margin: 3rem auto 0;
+    }
+    
+    /* Mobile theme toggle styling */
+    .navbar .theme-toggle {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 768px) {
     .hero {
         text-align: center;
+    }
+
+    .hero .btn {
+        padding: 15px;
     }
     
     .hero h1 {

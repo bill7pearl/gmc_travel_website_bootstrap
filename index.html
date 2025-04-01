@@ -26,9 +26,14 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#"><img class="logo" src="images/logo.png" alt="logo" srcset=""></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="d-flex align-items-center">
+                <button id="mobileThemeToggle" class="theme-toggle me-2 d-lg-none">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -43,19 +48,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#bookings">Bookings</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-dark" href="#signup">Sign up</a>
-                    </li>
-                    <li class="nav-item">
-                        <select class="form-select border-0">
-                            <option>EN</option>
-                        </select>
-                    </li>
-                    <li class="nav-item">
-                        <button id="themeToggle" class="theme-toggle">
+                    <li class="nav-item d-none d-lg-block">
+                        <button id="desktopThemeToggle" class="theme-toggle">
                             <i class="fas fa-sun"></i>
                         </button>
                     </li>
@@ -397,46 +391,65 @@
     <!-- Theme Toggle JS -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const themeToggle = document.getElementById('themeToggle');
-            const icon = themeToggle.querySelector('i');
+            const desktopThemeToggle = document.getElementById('desktopThemeToggle');
+            const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+            const desktopIcon = desktopThemeToggle.querySelector('i');
+            const mobileIcon = mobileThemeToggle.querySelector('i');
             
             // Check if user has a theme preference saved
             const currentTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', currentTheme);
             
-            // Set initial icon
+            // Set initial icons
             if (currentTheme === 'dark') {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
+                desktopIcon.classList.remove('fa-sun');
+                desktopIcon.classList.add('fa-moon');
+                mobileIcon.classList.remove('fa-sun');
+                mobileIcon.classList.add('fa-moon');
             }
             
-            themeToggle.addEventListener('click', function() {
+            // Function to toggle theme
+            function toggleTheme(iconElement) {
                 // Toggle theme
                 const currentTheme = document.documentElement.getAttribute('data-theme');
                 let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                 
                 // Apply animation
-                icon.classList.add('switch-animation');
+                iconElement.classList.add('switch-animation');
                 
                 // Switch icon and theme after a short delay for animation
                 setTimeout(() => {
                     document.documentElement.setAttribute('data-theme', newTheme);
                     localStorage.setItem('theme', newTheme);
                     
-                    // Change icon
+                    // Change icons on both buttons
                     if (newTheme === 'dark') {
-                        icon.classList.remove('fa-sun');
-                        icon.classList.add('fa-moon');
+                        desktopIcon.classList.remove('fa-sun');
+                        desktopIcon.classList.add('fa-moon');
+                        mobileIcon.classList.remove('fa-sun');
+                        mobileIcon.classList.add('fa-moon');
                     } else {
-                        icon.classList.remove('fa-moon');
-                        icon.classList.add('fa-sun');
+                        desktopIcon.classList.remove('fa-moon');
+                        desktopIcon.classList.add('fa-sun');
+                        mobileIcon.classList.remove('fa-moon');
+                        mobileIcon.classList.add('fa-sun');
                     }
                     
                     // Remove animation class
                     setTimeout(() => {
-                        icon.classList.remove('switch-animation');
+                        iconElement.classList.remove('switch-animation');
                     }, 300);
                 }, 200);
+            }
+            
+            // Desktop toggle event
+            desktopThemeToggle.addEventListener('click', function() {
+                toggleTheme(desktopIcon);
+            });
+            
+            // Mobile toggle event
+            mobileThemeToggle.addEventListener('click', function() {
+                toggleTheme(mobileIcon);
             });
             
             // Scroll Animations
