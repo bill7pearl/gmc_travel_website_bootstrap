@@ -636,10 +636,6 @@ footer p {
 
 /* Responsive Adjustments */
 @media (max-width: 991px) {
-    .hero {
-        padding: 6rem 0 3rem;
-    }
-    
     .hero h1 {
         font-size: 3.5rem;
     }
@@ -651,7 +647,6 @@ footer p {
 
 @media (max-width: 768px) {
     .hero {
-        padding: 5rem 0 3rem;
         text-align: center;
     }
     
